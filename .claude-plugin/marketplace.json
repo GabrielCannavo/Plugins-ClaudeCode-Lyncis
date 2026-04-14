@@ -1,0 +1,14 @@
+{
+  "name": "gabriel-local",
+  "plugins": [
+    {
+      "name": "cerebro-lyncis",
+      "source": "./cerebro-lyncis-plugin",
+      "description": "Obsidian vault companion for Cérebro Lyncis: query, distill, maintain, ingest, canvas, research, markdown reference, bases",
+      "version": "1.0.0"
+    }
+  ],
+  "owner": {
+    "name": "Gabriel"
+  }
+}
