@@ -1,7 +1,7 @@
 {
   "name": "cerebro-lyncis",
-  "description": "Obsidian vault companion for Cérebro Lyncis: query, distill, maintain, ingest, canvas, research, markdown reference, bases",
-  "version": "1.0.0",
+  "description": "Obsidian vault companion for Cérebro Lyncis: query, distill, garden (v2), prune, ingest, canvas, research, markdown reference, bases",
+  "version": "1.1.0",
   "author": { "name": "Gabriel" },
   "keywords": ["obsidian", "knowledge-management", "lyncis", "vault"]
 }
