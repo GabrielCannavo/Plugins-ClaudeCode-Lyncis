@@ -2,12 +2,6 @@
   "name": "gabriel-local",
   "plugins": [
     {
-      "name": "cerebro-lyncis",
-      "source": "./cerebro-lyncis-plugin",
-      "description": "Obsidian vault companion for Cérebro Lyncis: query, distill, garden (v2), prune, ingest, canvas, research, markdown reference, bases",
-      "version": "1.1.0"
-    },
-    {
       "name": "improve",
       "source": "./improve-plugin",
       "description": "Refina rascunhos de prompts — auditoria de slots + reescrita pronta para colar",
