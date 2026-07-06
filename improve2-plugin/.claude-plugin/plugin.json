@@ -1,0 +1,7 @@
+{
+  "name": "improve2",
+  "description": "Fork de teste do improve — auditoria de slots + reescrita, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
+  "version": "1.1.0",
+  "author": { "name": "Gabriel" },
+  "keywords": ["prompt-engineering", "refactor", "lyncis", "prompt", "test-fork"]
+}

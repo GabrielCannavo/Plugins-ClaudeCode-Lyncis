@@ -12,6 +12,12 @@
       "source": "./improve-plugin",
       "description": "Refina rascunhos de prompts — auditoria de slots + reescrita pronta para colar",
       "version": "1.0.0"
+    },
+    {
+      "name": "improve2",
+      "source": "./improve2-plugin",
+      "description": "Fork de teste do improve — melhorias de robustez (injection, rascunho vazio, idioma, calibração) em validação",
+      "version": "1.1.0"
     }
   ],
   "owner": {
