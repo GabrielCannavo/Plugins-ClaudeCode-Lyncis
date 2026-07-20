@@ -1,7 +1,7 @@
 {
   "name": "improve",
-  "description": "Refina rascunhos de prompts — auditoria de slots + reescrita pronta para colar",
-  "version": "1.0.0",
+  "description": "Refina rascunhos de prompts — auditoria de 10 slots + reescrita pronta para colar, com guardas de injection, tratamento de rascunho vazio, regra de idioma e exemplo de calibração",
+  "version": "1.1.0",
   "author": { "name": "Gabriel" },
   "keywords": ["prompt-engineering", "refactor", "lyncis", "prompt"]
 }
