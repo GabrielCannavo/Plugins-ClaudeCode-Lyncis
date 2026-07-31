@@ -1,0 +1,63 @@
+# gabriel-local — marketplace de plugins
+
+Marketplace local do Claude Code com o plugin **improve**: um refinador de
+rascunhos de prompts (auditoria de 10 slots + reescrita pronta para colar +
+explicação das mudanças).
+
+## Estrutura
+
+```
+Plugins/
+├── .claude-plugin/
+│   └── marketplace.json          # manifesto do marketplace (gabriel-local)
+├── improve-plugin/               # o plugin improve (v1.1.0)
+│   ├── .claude-plugin/plugin.json
+│   ├── commands/improve.md
+│   └── README.md
+├── instalar-skill-improve.md     # arquivo distribuível — formato Skill
+└── instalar-comando-improve.md   # arquivo distribuível — formato comando/plugin
+```
+
+> Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
+> validadas no fork de teste `improve2`. O `improve2` foi aposentado — não existe
+> mais como plugin separado.
+
+## Instalar localmente (Claude Code)
+
+```
+/plugin marketplace add <caminho-desta-pasta>
+/plugin install improve@gabriel-local
+```
+
+Uso: `/improve <rascunho do prompt>`
+(ex.: `/improve escreve um post sobre vendas`).
+
+## Distribuir para outras pessoas
+
+Há dois arquivos prontos para enviar. A pessoa **anexa o arquivo no Claude dela e
+diz "instale essa skill para mim"** — o Claude segue as instruções de instalação
+embutidas no próprio arquivo. Escolha **um** formato conforme o Claude que a
+pessoa usa:
+
+| Enviar este arquivo | Quando | Como fica o disparo |
+|---------------------|--------|---------------------|
+| `instalar-skill-improve.md` | Claude com **Skills** (Cowork / app desktop) | Automático — ativa quando a pessoa pede para "melhorar/refinar um prompt" |
+| `instalar-comando-improve.md` | **Claude Code** (suporte a plugin/slash command) | Explícito — a pessoa chama `/improve <rascunho>` |
+
+Não precisa enviar os dois; cada um instala a mesma lógica de forma independente.
+
+### Limites honestos da distribuição por arquivo
+
+- No **claude.ai comum (chat web sem Skills)** não há onde instalar de forma
+  persistente. Nesse caso o próprio arquivo instrui o Claude a adotar o
+  comportamento **apenas naquela conversa** (não fica salvo).
+- Para distribuição persistente e versionada de verdade, o caminho mais robusto é
+  publicar este marketplace num repositório Git (ex.: GitHub) e a pessoa rodar
+  `/plugin marketplace add <url-do-repo>` + `/plugin install improve@gabriel-local`.
+
+## Versão
+
+`improve` **v1.1.0** — inclui guarda contra injection (breakout de `</draft>`),
+tratamento de rascunho vazio, regra de idioma (prompt refinado no idioma do
+rascunho; análise no idioma da conversa), curto-circuito para "rascunho já está
+claro", exemplo de calibração inline e agrupamento de slots n/a.
