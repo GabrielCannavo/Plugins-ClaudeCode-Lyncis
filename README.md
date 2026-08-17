@@ -1,8 +1,9 @@
 # gabriel-local — marketplace de plugins
 
 Marketplace local do Claude Code com o plugin **improve**: um refinador de
-rascunhos de prompts (auditoria de 10 slots + reescrita pronta para colar +
-explicação das mudanças).
+rascunhos de prompts. Devolve cinco seções — auditoria de 10 slots, anti-padrões
+detectados, prompt refinado pronto para colar, skills sugeridas e as mudanças
+principais.
 
 ## Estrutura
 
@@ -10,7 +11,7 @@ explicação das mudanças).
 Plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # manifesto do marketplace (gabriel-local)
-├── improve-plugin/               # o plugin improve (v1.1.0)
+├── improve-plugin/               # o plugin improve (v1.2.0)
 │   ├── .claude-plugin/plugin.json
 │   ├── commands/improve.md
 │   └── README.md
@@ -19,8 +20,8 @@ Plugins/
 ```
 
 > Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
-> validadas no fork de teste `improve2`. O `improve2` foi aposentado — não existe
-> mais como plugin separado.
+> validadas no fork de teste `improve2` (aposentado). A v1.2.0 adicionou as seções
+> Anti-padrões e Skills sugeridas.
 
 ## Instalar localmente (Claude Code)
 
@@ -57,7 +58,8 @@ Não precisa enviar os dois; cada um instala a mesma lógica de forma independen
 
 ## Versão
 
-`improve` **v1.1.0** — inclui guarda contra injection (breakout de `</draft>`),
-tratamento de rascunho vazio, regra de idioma (prompt refinado no idioma do
-rascunho; análise no idioma da conversa), curto-circuito para "rascunho já está
-claro", exemplo de calibração inline e agrupamento de slots n/a.
+`improve` **v1.2.0** — resposta em cinco seções (Auditoria → Anti-padrões →
+Prompt refinado → Skills sugeridas → Mudanças principais). Inclui, desde a v1.1.0,
+guarda contra injection (breakout de `</draft>`), tratamento de rascunho vazio,
+regra de idioma, curto-circuito para "rascunho já está claro", exemplo de
+calibração inline e agrupamento de slots n/a.

@@ -4,8 +4,8 @@
     {
       "name": "improve",
       "source": "./improve-plugin",
-      "description": "Refina rascunhos de prompts — auditoria de 10 slots + reescrita pronta para colar, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
-      "version": "1.1.0"
+      "description": "Refina rascunhos de prompts — auditoria de 10 slots + anti-padrões + reescrita pronta para colar + skills sugeridas, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
+      "version": "1.2.0"
     }
   ],
   "owner": {
