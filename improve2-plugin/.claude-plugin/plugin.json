@@ -1,0 +1,7 @@
+{
+  "name": "improve2",
+  "description": "FORK DE TESTE do improve — adiciona estágio de discovery condicional (≥2 slots ✗ → 1 rodada, ≤4 perguntas via elicitation widget) antes da reescrita. Consolidar no improve após validação.",
+  "version": "1.3.0-test",
+  "author": { "name": "Gabriel" },
+  "keywords": ["prompt-engineering", "refactor", "lyncis", "prompt", "test"]
+}
