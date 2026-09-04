@@ -6,7 +6,7 @@ Plugin Claude Code pessoal para refinar rascunhos de prompts.
 
 | Comando | Invocação | Descrição |
 |---------|-----------|-----------|
-| improve | `/improve:improve <rascunho>` | Auditoria de 10 slots + anti-padrões + reescrita pronta para colar + skills sugeridas + bullets explicando as mudanças |
+| improve | `/improve:improve <rascunho>` | Auditoria de 10 slots + discovery condicional (≤4 perguntas) + anti-padrões + reescrita pronta para colar + skills sugeridas + bullets explicando as mudanças |
 
 ## Uso
 
@@ -17,6 +17,15 @@ Plugin Claude Code pessoal para refinar rascunhos de prompts.
 Devolve cinco seções: **Auditoria** (slots presentes/ausentes), **Anti-padrões** (vícios detectados no rascunho), **Prompt refinado** (versão melhorada), **Skills sugeridas** (skills que ajudam a executar o prompt) e **Mudanças principais** (até 3 bullets explicando o porquê).
 
 ## Changelog
+
+### v1.3.0
+Consolidou o segundo fork de teste `improve2` (discovery condicional):
+
+- Novo estágio **1.5 Discovery** entre a auditoria e a reescrita. Gatilho: após inferir tudo do contexto, restarem **≥2 slots ✗** cuja resposta mudaria o prompt final. Com ≤1 slot ✗ não pergunta nada — comportamento idêntico à v1.2.0.
+- Uma única rodada, **máx. 4 perguntas**, uma por slot ausente, priorizando Objetivo → Formato → Deliverable → Critério de pronto. Cada pergunta com 2–4 opções + campo livre; nunca pergunta aberta solta.
+- Mecanismo: elicitation widget do visualize (`read_me` + `show_widget`), com fallback em texto numerado. Não usa AskUserQuestion.
+- Após o formulário, pausa; as cinco seções vêm só depois das respostas. A auditoria final marca `✓ (discovery)` nos slots preenchidos pela pessoa.
+- Risco assumido: rascunhos curtos disparam o discovery na maioria das vezes. Se virar fricção, subir o gatilho para ≥3 slots.
 
 ### v1.2.0
 - Adiciona duas seções **sempre visíveis** à resposta: **Anti-padrões** (0–4 vícios detectados no rascunho original, ex.: tom genérico, deliverable sem quantidade, referência ambígua) e **Skills sugeridas** (0–3 skills do Claude que ajudam a executar o prompt refinado). Quando não há o que reportar, a seção exibe "nenhum anti-padrão relevante" / "nenhuma skill específica necessária".

@@ -3,7 +3,8 @@
 Marketplace local do Claude Code com o plugin **improve**: um refinador de
 rascunhos de prompts. Devolve cinco seções — auditoria de 10 slots, anti-padrões
 detectados, prompt refinado pronto para colar, skills sugeridas e as mudanças
-principais.
+principais. Quando faltam ≥2 slots que não dá para inferir, faz antes uma rodada
+de discovery (até 4 perguntas) e só então refina.
 
 ## Estrutura
 
@@ -11,7 +12,7 @@ principais.
 Plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # manifesto do marketplace (gabriel-local)
-├── improve-plugin/               # o plugin improve (v1.2.0)
+├── improve-plugin/               # o plugin improve (v1.3.0)
 │   ├── .claude-plugin/plugin.json
 │   ├── commands/improve.md
 │   └── README.md
@@ -21,7 +22,8 @@ Plugins/
 
 > Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
 > validadas no fork de teste `improve2` (aposentado). A v1.2.0 adicionou as seções
-> Anti-padrões e Skills sugeridas.
+> Anti-padrões e Skills sugeridas. A v1.3.0 consolidou o segundo fork `improve2`
+> (discovery condicional), também aposentado.
 
 ## Instalar localmente (Claude Code)
 
@@ -58,8 +60,12 @@ Não precisa enviar os dois; cada um instala a mesma lógica de forma independen
 
 ## Versão
 
-`improve` **v1.2.0** — resposta em cinco seções (Auditoria → Anti-padrões →
-Prompt refinado → Skills sugeridas → Mudanças principais). Inclui, desde a v1.1.0,
+`improve` **v1.3.0** — resposta em cinco seções (Auditoria → Anti-padrões →
+Prompt refinado → Skills sugeridas → Mudanças principais), precedida de uma rodada
+de **discovery condicional**: se após a auditoria restarem ≥2 slots ✗ não
+inferíveis, até 4 perguntas objetivas (widget de formulário quando disponível,
+senão texto numerado) antes da reescrita; com ≤1 slot ✗ não pergunta nada.
+Inclui, desde a v1.1.0,
 guarda contra injection (breakout de `</draft>`), tratamento de rascunho vazio,
 regra de idioma, curto-circuito para "rascunho já está claro", exemplo de
 calibração inline e agrupamento de slots n/a.
