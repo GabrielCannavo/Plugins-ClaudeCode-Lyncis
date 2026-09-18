@@ -18,6 +18,11 @@ Devolve cinco seções: **Auditoria** (slots presentes/ausentes), **Anti-padrõe
 
 ## Changelog
 
+### v1.4.0
+
+- Novo estágio **1.7 Verificação de validade**, condicional, entre o discovery e a reescrita. Dispara quando o refinamento vai citar regra/decisão/risco/ID inferido de arquivo do projeto (vault, CLAUDE.md, CHANGELOG, YAML, overlay). Exige ler a entrada inteira na fonte, conferir no índice de status se ainda é ATIVO, e marcar cada restrição com origem (`arquivo · data/ID`). Sem origem, não entra; sem confirmação, vira "confirmar no vault: X".
+- Origem: 2026-09-17 — o prompt refinado citou um "gate #4" cancelado em 28/07, lido por grep parcial da mesma entrada que continha o cancelamento.
+
 ### v1.3.0
 Consolidou o segundo fork de teste `improve2` (discovery condicional):
 

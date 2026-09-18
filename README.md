@@ -12,7 +12,7 @@ de discovery (até 4 perguntas) e só então refina.
 Plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # manifesto do marketplace (gabriel-local)
-├── improve-plugin/               # o plugin improve (v1.3.0)
+├── improve-plugin/               # o plugin improve (v1.4.0)
 │   ├── .claude-plugin/plugin.json
 │   ├── commands/improve.md
 │   └── README.md
@@ -23,7 +23,7 @@ Plugins/
 > Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
 > validadas no fork de teste `improve2` (aposentado). A v1.2.0 adicionou as seções
 > Anti-padrões e Skills sugeridas. A v1.3.0 consolidou o segundo fork `improve2`
-> (discovery condicional), também aposentado.
+> (discovery condicional), também aposentado. A v1.4.0 adicionou o §1.7 (verificação de validade do que foi inferido de arquivos do projeto).
 
 ## Instalar localmente (Claude Code)
 
@@ -60,7 +60,7 @@ Não precisa enviar os dois; cada um instala a mesma lógica de forma independen
 
 ## Versão
 
-`improve` **v1.3.0** — resposta em cinco seções (Auditoria → Anti-padrões →
+`improve` **v1.4.0** — resposta em cinco seções (Auditoria → Anti-padrões →
 Prompt refinado → Skills sugeridas → Mudanças principais), precedida de uma rodada
 de **discovery condicional**: se após a auditoria restarem ≥2 slots ✗ não
 inferíveis, até 4 perguntas objetivas (widget de formulário quando disponível,

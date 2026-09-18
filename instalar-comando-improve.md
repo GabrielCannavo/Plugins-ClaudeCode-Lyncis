@@ -64,7 +64,7 @@ Ao final, confirme em 1–2 frases o que foi criado e mostre um exemplo de uso.
 {
   "name": "improve",
   "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery condicional (até 4 perguntas quando faltam ≥2 slots) + anti-padrões + reescrita pronta para colar + skills sugeridas, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "author": { "name": "Gabriel" },
   "keywords": ["prompt-engineering", "refactor", "lyncis", "prompt"]
 }
@@ -139,6 +139,18 @@ Rascunho: "faz um relatório do mês pro cliente" → ✗ em Público, Formato, 
 4. O que precisa estar lá pra ser aprovado? livre
 
 Rascunho: "e-mail de follow-up pro cliente que não respondeu a proposta há 5 dias, máx 120 palavras, CTA agendar call" → ≤ 1 slot ✗ relevante. **Não dispara.**
+
+### 1.7. Verificação de validade (condicional — só quando o rascunho aponta para um projeto com base de conhecimento)
+
+Dispara se o refinamento vai citar, como restrição ou contexto, qualquer regra, decisão, risco, ID ou status que você **inferiu de arquivo** (vault, CLAUDE.md, CHANGELOG, YAML de catálogo, overlay). Não dispara para o que veio da mensagem do usuário.
+
+Para cada item que vai entrar no prompt refinado:
+
+1. Localize a fonte primária e leia a **entrada inteira**, não o trecho que o grep devolveu — cancelamentos, errata e "SUPERSEDIDA" costumam estar na mesma entrada, linhas abaixo.
+2. Se o projeto tem índice de status de decisões (ex.: tabela no CHANGELOG) ou campo de riscos com histórico, confira lá se o item ainda é ATIVO. Cancelado/refutado/supersedido → não cite; cite o estado atual, com data ou D-id.
+3. Item que não dá para confirmar em ≤2 leituras → entra no prompt como "confirmar no vault: X", nunca como regra.
+
+Saída: cada restrição citada no prompt refinado carrega origem verificável (`arquivo · data/ID`). Restrição sem origem não entra.
 
 ### 2. Reescrita
 
@@ -223,7 +235,7 @@ Máximo 3 bullets em **Mudanças principais**. Foco no porquê, não só no o qu
       "name": "improve",
       "source": "./improve-plugin",
       "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery condicional + anti-padrões + reescrita pronta para colar + skills sugeridas",
-      "version": "1.3.0"
+      "version": "1.4.0"
     }
   ],
   "owner": { "name": "Gabriel" }
