@@ -1,0 +1,15 @@
+{
+  "name": "lyncis-kit",
+  "version": "1.0.0",
+  "description": "Kit de trabalho do Gabriel: improve (refina prompts), encerrar-sessao (fecha a sessão e registra evidência de ambiente), revisar-ambiente (corrige CLAUDE.md, docs e permissões por evidência) e configurar-projeto (setup inicial com contrato do ambiente).",
+  "author": {
+    "name": "Gabriel"
+  },
+  "keywords": [
+    "prompt-engineering",
+    "claude-md",
+    "governanca",
+    "sessao",
+    "lyncis"
+  ]
+}

@@ -2,10 +2,9 @@
   "name": "gabriel-local",
   "plugins": [
     {
-      "name": "improve",
-      "source": "./improve-plugin",
-      "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery por padrão (pula só sem lacunas nem ambiguidade) + anti-padrões + reescrita pronta para colar + skills sugeridas + verificação de validade do que foi inferido de arquivos, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
-      "version": "1.5.0"
+      "name": "lyncis-kit",
+      "source": "./lyncis-kit",
+      "description": "Kit de trabalho do Gabriel: improve (refina prompts), encerrar-sessao (fecha a sessão e registra evidência de ambiente), revisar-ambiente (corrige CLAUDE.md, docs e permissões por evidência) e configurar-projeto (setup inicial com contrato do ambiente)."
     }
   ],
   "owner": {
