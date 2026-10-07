@@ -1,7 +1,7 @@
 {
   "name": "improve",
-  "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery condicional (até 4 perguntas quando faltam ≥2 slots) + anti-padrões + reescrita pronta para colar + skills sugeridas + verificação de validade do que foi inferido de arquivos, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
-  "version": "1.4.0",
+  "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery por padrão (pula só sem lacunas nem ambiguidade) + anti-padrões + reescrita pronta para colar + skills sugeridas + verificação de validade do que foi inferido de arquivos, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
+  "version": "1.5.0",
   "author": {
     "name": "Gabriel"
   },

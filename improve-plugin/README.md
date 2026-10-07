@@ -6,7 +6,7 @@ Plugin Claude Code pessoal para refinar rascunhos de prompts.
 
 | Comando | Invocação | Descrição |
 |---------|-----------|-----------|
-| improve | `/improve:improve <rascunho>` | Auditoria de 10 slots + discovery condicional (≤4 perguntas) + anti-padrões + reescrita pronta para colar + skills sugeridas + bullets explicando as mudanças |
+| improve | `/improve:improve <rascunho>` | Auditoria de 10 slots + discovery por padrão + anti-padrões + reescrita pronta para colar + skills sugeridas + bullets explicando as mudanças |
 
 ## Uso
 
@@ -17,6 +17,13 @@ Plugin Claude Code pessoal para refinar rascunhos de prompts.
 Devolve cinco seções: **Auditoria** (slots presentes/ausentes), **Anti-padrões** (vícios detectados no rascunho), **Prompt refinado** (versão melhorada), **Skills sugeridas** (skills que ajudam a executar o prompt) e **Mudanças principais** (até 3 bullets explicando o porquê).
 
 ## Changelog
+
+### v1.5.0
+
+- **Discovery passa a ser o padrão.** Antes disparava só com ≥2 slots ✗; agora dispara sempre e só é pulado quando há **zero slots ✗ relevantes e zero ambiguidade de interpretação** (duas leituras plausíveis que gerariam prompts diferentes). Na dúvida, dispara.
+- **Sem teto de 4 perguntas.** Entra uma regra de corte: cada pergunta precisa mudar o resultado. Ambiguidade de interpretação entra na ordem de prioridade logo após Objetivo, com as leituras como opções.
+- Removida a frase "Fricção desnecessária é pior que um slot a menos", que contradizia o novo padrão. Exemplos da §1.5 refeitos (dispara com 1 lacuna, dispara só por ambiguidade, pula). REGRA ABSOLUTA e Formato da resposta tratam o formulário como primeira resposta padrão. §1.7 inalterada.
+- Risco assumido: mais atrito em prompts simples. Se virar problema, aceitar ✗ em slots periféricos (Tom, Papel) sem disparar.
 
 ### v1.4.0
 

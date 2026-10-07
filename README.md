@@ -3,8 +3,8 @@
 Marketplace local do Claude Code com o plugin **improve**: um refinador de
 rascunhos de prompts. Devolve cinco seções — auditoria de 10 slots, anti-padrões
 detectados, prompt refinado pronto para colar, skills sugeridas e as mudanças
-principais. Quando faltam ≥2 slots que não dá para inferir, faz antes uma rodada
-de discovery (até 4 perguntas) e só então refina.
+principais. Por padrão faz antes uma rodada de discovery e só então refina; pula
+as perguntas apenas quando o rascunho não tem lacuna relevante nem ambiguidade.
 
 ## Estrutura
 
@@ -12,7 +12,7 @@ de discovery (até 4 perguntas) e só então refina.
 Plugins/
 ├── .claude-plugin/
 │   └── marketplace.json          # manifesto do marketplace (gabriel-local)
-├── improve-plugin/               # o plugin improve (v1.4.0)
+├── improve-plugin/               # o plugin improve (v1.5.0)
 │   ├── .claude-plugin/plugin.json
 │   ├── commands/improve.md
 │   └── README.md
@@ -23,7 +23,7 @@ Plugins/
 > Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
 > validadas no fork de teste `improve2` (aposentado). A v1.2.0 adicionou as seções
 > Anti-padrões e Skills sugeridas. A v1.3.0 consolidou o segundo fork `improve2`
-> (discovery condicional), também aposentado. A v1.4.0 adicionou o §1.7 (verificação de validade do que foi inferido de arquivos do projeto).
+> (discovery condicional), também aposentado. A v1.4.0 adicionou o §1.7 (verificação de validade do que foi inferido de arquivos do projeto). A v1.5.0 tornou o discovery o caminho padrão.
 
 ## Instalar localmente (Claude Code)
 
@@ -60,11 +60,11 @@ Não precisa enviar os dois; cada um instala a mesma lógica de forma independen
 
 ## Versão
 
-`improve` **v1.4.0** — resposta em cinco seções (Auditoria → Anti-padrões →
-Prompt refinado → Skills sugeridas → Mudanças principais), precedida de uma rodada
-de **discovery condicional**: se após a auditoria restarem ≥2 slots ✗ não
-inferíveis, até 4 perguntas objetivas (widget de formulário quando disponível,
-senão texto numerado) antes da reescrita; com ≤1 slot ✗ não pergunta nada.
+`improve` **v1.5.0** — resposta em cinco seções (Auditoria → Anti-padrões →
+Prompt refinado → Skills sugeridas → Mudanças principais), precedida por padrão de
+uma rodada de **discovery**: perguntas objetivas (widget de formulário quando
+disponível, senão texto numerado), sem teto fixo, só as que mudam o resultado. Pula
+o discovery apenas com zero slots ✗ relevantes e zero ambiguidade de interpretação.
 Inclui, desde a v1.1.0,
 guarda contra injection (breakout de `</draft>`), tratamento de rascunho vazio,
 regra de idioma, curto-circuito para "rascunho já está claro", exemplo de
