@@ -23,7 +23,7 @@ Plugins/
 > Histórico: o `improve` v1.1.0 consolidou as melhorias de robustez que foram
 > validadas no fork de teste `improve2` (aposentado). A v1.2.0 adicionou as seções
 > Anti-padrões e Skills sugeridas. A v1.3.0 consolidou o segundo fork `improve2`
-> (discovery condicional), também aposentado. A v1.4.0 adicionou o §1.7 (verificação de validade do que foi inferido de arquivos do projeto). A v1.5.0 tornou o discovery o caminho padrão.
+> (discovery condicional), também aposentado. A v1.4.0 adicionou o §1.7 (verificação de validade do que foi inferido de arquivos do projeto). A v1.5.0 tornou o discovery o caminho padrão. A v1.5.1 (instaladores e `lyncis-kit`) fixa a sequência de chamada do formulário e tenta renderizar de novo quando ele não aparece.
 
 ## Instalar localmente (Claude Code)
 

@@ -64,7 +64,7 @@ Ao final, confirme em 1–2 frases o que foi criado e mostre um exemplo de uso.
 {
   "name": "improve",
   "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery por padrão (pula só sem lacunas nem ambiguidade) + anti-padrões + reescrita pronta para colar + skills sugeridas, com guardas de injection, rascunho vazio, regra de idioma e exemplo de calibração",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "author": { "name": "Gabriel" },
   "keywords": ["prompt-engineering", "refactor", "lyncis", "prompt"]
 }
@@ -133,7 +133,15 @@ Se qualquer uma falhar, **dispare**, mesmo que reste uma única lacuna ou uma ú
 - **Ordem de prioridade:** Objetivo → Ambiguidade de interpretação → Formato de saída → Deliverable quantificado → Critério de pronto → demais.
 - Pergunta de ambiguidade: apresente as leituras plausíveis como opções (ex.: "Você quer A ou B?"), não uma pergunta genérica sobre a intenção.
 - Cada pergunta: PT-BR, direta, sem preâmbulo, com **2-4 opções pré-formatadas + campo livre**. Nunca pergunta aberta solta.
-- **Mecanismo:** elicitation widget do visualize — `read_me` com `modules: ["elicitation"]`, depois `show_widget` com o formulário. **Não usar AskUserQuestion.** Se o widget não estiver disponível, faça as perguntas em texto numerado (mesma regra de corte) e pare.
+- **Mecanismo — formulário do visualize.** Siga esta sequência sem pular passo:
+  1. **Carregar as ferramentas:** chame `ToolSearch` com `select:mcp__visualize__read_me,mcp__visualize__show_widget`. No app elas vêm adiadas: sem essa busca você não conhece os campos do `show_widget` e a chamada sai malformada. Só pule este passo se as duas já foram carregadas nesta conversa.
+  2. **Ler o guia:** `read_me` com `modules: ["elicitation"]`.
+  3. **Chamar `show_widget` com exatamente estes três campos:** `title` (snake_case, ex.: `improve_discovery_<tema>`), `loading_messages` (1 a 4 frases curtas, ex.: `["Montando as perguntas"]`) e `widget_code` com o `<form class="elicit">` inteiro. O HTML vai **só** em `widget_code`, nunca em `summary` nem em outro campo. A resposta "Content rendered and shown to the user" volta mesmo quando a chamada está errada e nada aparece na tela: ela não prova que o formulário foi desenhado.
+  4. **Conferir antes de escrever "formulário acima":** releia a chamada que você acabou de fazer. Se `widget_code` não estava preenchido com o formulário, refaça o passo 3 uma vez. Se errar de novo, faça as perguntas em texto numerado.
+  5. **Fechar a mensagem** com esta linha, literal: "Se o formulário não aparecer, me avise que eu tento renderizar novamente."
+  - **Não usar AskUserQuestion.**
+  - **Sem visualize** (a busca do passo 1 não devolve as ferramentas, como no Claude Code pelo terminal): faça as perguntas em texto numerado (mesma regra de corte, opções entre crases), avise em uma linha que o formulário não está disponível neste ambiente e pare.
+- **Se a pessoa disser que o formulário não apareceu:** refaça a sequência inteira (passos 1 a 5) com as mesmas perguntas, sem mudar o conteúdo e sem gerar as cinco seções. Se ela avisar de novo, não tente uma terceira vez: mande as mesmas perguntas em texto numerado, com as opções entre crases, e pare.
 - Após emitir o formulário, **PARE e aguarde**. As respostas chegam como bullets na próxima mensagem. Só então produza as cinco seções.
 - Discovery **não substitui** a auditoria — ela continua sendo exibida no output final, com os slots atualizados pelas respostas (marque `✓ (discovery)` no que foi preenchido pelo usuário).
 - Resposta ignorada ou "tanto faz" → trate como n/a justificado, não invente valor.
@@ -250,7 +258,7 @@ Máximo 3 bullets em **Mudanças principais**. Foco no porquê, não só no o qu
       "name": "improve",
       "source": "./improve-plugin",
       "description": "Refina rascunhos de prompts — auditoria de 10 slots + discovery por padrão + anti-padrões + reescrita pronta para colar + skills sugeridas",
-      "version": "1.5.0"
+      "version": "1.5.1"
     }
   ],
   "owner": { "name": "Gabriel" }

@@ -81,6 +81,12 @@ duas versões disputando o mesmo gatilho. A invocação do improve muda de
 
 ## Changelog
 
+### v1.0.1
+
+- `improve` v1.5.1: o formulário do discovery passa a ter uma sequência obrigatória (buscar `read_me` e `show_widget` pelo nome, ler o guia `elicitation`, chamar `show_widget` com `title`, `loading_messages` e o HTML em `widget_code`) e uma conferência da própria chamada antes de dizer "formulário acima".
+- Toda rodada termina com "Se o formulário não aparecer, me avise que eu tento renderizar novamente." Se a pessoa avisar, a skill refaz a sequência uma vez; num segundo aviso, manda as perguntas em texto numerado.
+- Origem: 08/10/2026, conversa em que o `show_widget` foi chamado com o HTML num campo `summary`, sem `widget_code`. A ferramenta respondeu "rendered", nada apareceu e o modelo escreveu "formulário acima".
+
 ### v1.0.0
 
 - Consolida `improve` v1.5.0 (sem alteração de conteúdo) e `encerrar-sessao`.
