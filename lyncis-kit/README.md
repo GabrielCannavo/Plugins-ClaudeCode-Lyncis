@@ -81,6 +81,12 @@ duas versões disputando o mesmo gatilho. A invocação do improve muda de
 
 ## Changelog
 
+### v1.1.0
+
+- `improve` v1.6.0: dois slots novos na auditoria. **Esforço** (11) classifica a tarefa em baixo/médio/alto por quatro fatores (causa conhecida, reversibilidade, escopo, custo do erro); em médio/alto o prompt refinado ganha 1-3 **armadilhas** específicas da tarefa. **Postura** (12) descreve como o executor trabalha, sempre como comportamento verificável, separada do Papel (que é fixo na sessão).
+- Nova regra de **correção de rumo** (§2.1): quando o rascunho corrige a sessão em andamento, o improve lê a conversa e escreve a postura como "Pare de X. Passe a Y.", com o X citando o que aconteceu de fato; sem histórico, pergunta.
+- Spec: `docs/superpowers/specs/2026-10-09-improve-esforco-design.md`.
+
 ### v1.0.1
 
 - `improve` v1.5.1: o formulário do discovery passa a ter uma sequência obrigatória (buscar `read_me` e `show_widget` pelo nome, ler o guia `elicitation`, chamar `show_widget` com `title`, `loading_messages` e o HTML em `widget_code`) e uma conferência da própria chamada antes de dizer "formulário acima".
