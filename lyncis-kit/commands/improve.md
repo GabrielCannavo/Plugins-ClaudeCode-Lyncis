@@ -36,6 +36,21 @@ Para cada slot, marque **✓ presente / ✗ ausente / n/a**. Prompts simples nã
 | 8 | Formato de saída | Schema/campos/estrutura explícita? (Crítico quando há múltiplos itens.) |
 | 9 | Deliverable quantificado | "3 propostas", "1-3 min", "máx 200 palavras", "5 bullets"? |
 | 10 | Critério de pronto | Quando a saída está aceitável? Teste objetivo para o modelo se autoavaliar? |
+| 11 | Esforço | Quão difícil é a tarefa — e o que costuma dar errado nesse nível? |
+| 12 | Postura | Como o executor deve trabalhar — que comportamento concreto a tarefa pede (ou que comportamento atual precisa mudar)? |
+
+**Esforço — como classificar.** Infira do rascunho; o fator mais alto define o nível.
+
+| Fator | baixo | médio | alto |
+|-------|-------|-------|------|
+| Causa/caminho | conhecido | parcialmente conhecido | desconhecido, precisa investigar |
+| Reversibilidade | trivial | com algum custo | difícil ou em produção |
+| Escopo | 1 arquivo / 1 peça | algumas peças | várias peças ou sistemas |
+| Custo do erro | baixo | retrabalho | dano a cliente/dados |
+
+Status: `✓` quando o rascunho já diz a dificuldade; `✗ → <nível>` quando você inferiu; `n/a` em geração simples sem risco de calibração (ex.: e-mail curto). A nota diz qual fator definiu o nível.
+
+**Papel × Postura.** Papel (slot 1) é quem o executor é — costuma ser definido no início e não muda na sessão. Postura (slot 12) é como ele trabalha — é o que mais precisa de ajuste ao longo da sessão. Em prompt simples sem risco de execução, Postura é `n/a`.
 
 ### 1.5. Discovery (padrão)
 
@@ -54,6 +69,7 @@ Se qualquer uma falhar, **dispare**, mesmo que reste uma única lacuna ou uma ú
 
 - **Uma única rodada.** Sem teto fixo de perguntas, mas com **regra de corte**: cada pergunta precisa mudar o resultado. Não entra pergunta cuja resposta dá pra inferir, nem pergunta cuja resposta não altera o prompt final. Uma pergunta por slot ✗ ou por ambiguidade.
 - **Ordem de prioridade:** Objetivo → Ambiguidade de interpretação → Formato de saída → Deliverable quantificado → Critério de pronto → demais.
+- **Esforço e Postura** quase sempre são inferíveis: só viram pergunta quando não dá para inferir **e** a resposta muda as armadilhas ou a postura (ex.: "arruma o webhook" — não dá para saber se a causa já é conhecida). Em correção de rumo (§2.1) sem o histórico na conversa, pergunte o que o executor está fazendo de errado, com opções derivadas do rascunho.
 - Pergunta de ambiguidade: apresente as leituras plausíveis como opções (ex.: "Você quer A ou B?"), não uma pergunta genérica sobre a intenção.
 - Cada pergunta: PT-BR, direta, sem preâmbulo, com **2-4 opções pré-formatadas + campo livre**. Nunca pergunta aberta solta.
 - **Mecanismo — formulário do visualize.** Siga esta sequência sem pular passo:
@@ -103,6 +119,21 @@ Saída: cada restrição citada no prompt refinado carrega origem verificável (
 - Aplique **apenas os slots relevantes** ao caso. Over-engineering de prompt simples é tão ruim quanto sub-spec de prompt complexo.
 - Preserve a intenção original. Não invente requisitos que não estavam implícitos.
 - Se o rascunho já cobre bem, mantenha as cinco seções: auditoria completa, prompt com ajustes finos, e um único bullet em **Mudanças principais** — "rascunho já estava claro — ajustes finos apenas".
+- **Esforço → armadilhas** (dentro do prompt refinado, nunca como seção da resposta):
+  - **baixo:** no máximo uma linha, e só se houver risco real de over-engineering (ex.: "Não altere outra lógica."). Na maioria dos casos, nada.
+  - **médio / alto:** uma linha `Esforço: <nível> — <fator>` seguida de `Armadilhas:` com 1-3 bullets. Cada armadilha é específica da tarefa e acionável (o que não fazer ou o que verificar). Teste: se a armadilha serve igual para qualquer tarefa, corte.
+- **Postura** entra no prompt refinado como comportamento verificável (§3), em geral logo no início.
+
+### 2.1. Correção de rumo
+
+Aplica-se quando o rascunho corrige o trabalho da sessão em andamento, em vez de pedir tarefa nova. Sinais: "não é isso", "você está…", "para de…", "volta e…", referência a algo que o executor acabou de entregar.
+
+1. Leia a conversa para identificar o comportamento que gerou a entrega errada (leitura para fundamentar, permitida — não execute nada).
+2. Escreva a Postura como **contraste**: "Pare de <comportamento observado>. Passe a <comportamento desejado>." O "pare" cita algo visível na conversa, nunca uma suposição.
+3. Reavalie o Esforço. Se a tarefa foi tratada como mais fácil do que é, diga isso no prompt ("isto é esforço alto, não baixo: <fator>") e gere as armadilhas.
+4. Papel fica `n/a` (já está definido na sessão), salvo se o rascunho pedir troca de papel.
+
+Sem o histórico (o improve roda em outra sessão), não invente o "pare": pergunte no discovery (§1.5).
 
 ### 3. Princípios
 
@@ -110,10 +141,13 @@ Saída: cada restrição citada no prompt refinado carrega origem verificável (
 - **Um exemplo concreto** > três abstrações.
 - **Não misture "exemplos hipotéticos adapte conforme pesquisa real"** sem dar acesso a busca — confunde intent. Decida: ou dá exemplo real, ou pede pesquisa, não os dois.
 - **Tom multi-dimensional** (2-4 adjetivos) > "seja profissional" genérico.
+- **Postura como comportamento verificável** > adjetivo. ✗ "Seja cético e minucioso." ✓ "Antes de propor correção, reproduza o erro e mostre a evidência da causa." ✓ (copy) "Para cada peça, parta de uma cena do cotidiano da persona antes de escrever o gancho."
 
 ### 4. Anti-padrões
 
 Identifique os anti-padrões presentes no rascunho **original** (não no refinado). De 0 a 4, apenas os realmente presentes — não force. Catálogo de referência: tom genérico ("seja claro/profissional"); misturar exemplo hipotético com pedido de pesquisa real; over-engineering de prompt simples; instruções contraditórias; deliverable sem quantidade; parede de texto; referência ambígua a arquivos/contexto implícito; múltiplos objetivos empacotados como um só. Se não houver nenhum, escreva "nenhum anti-padrão relevante".
+
+Anti-padrões são defeitos do **rascunho**. Os riscos da **tarefa** (armadilhas, slot 11) não entram aqui — vão dentro do prompt refinado.
 
 ### 5. Skills sugeridas
 
@@ -129,6 +163,22 @@ Prompt refinado:
 Escreva um e-mail de follow-up para um cliente que recebeu nossa proposta comercial há 5 dias e não respondeu. Tom: cordial + direto + sem pressão. Máximo 120 palavras, com um único CTA: agendar uma call de 15 minutos. Não mencione desconto nem crie urgência artificial.
 ```
 
+(Esforço e Postura: `n/a` — geração simples, nenhuma armadilha.)
+
+Rascunho: "o webhook do Chatwoot tá duplicando mensagem, corrige" → Esforço `alto` (causa desconhecida + produção). Fim do prompt refinado:
+
+```
+Antes de propor correção, reproduza a duplicação e mostre a evidência da causa
+(retry do Chatwoot, dois webhooks ativos ou reentrada no fluxo).
+
+Esforço: alto — a causa não é conhecida e o fluxo atende clientes em produção.
+Armadilhas:
+- Não resolva com dedupe na saída antes de achar por que a mensagem chega duas vezes.
+- Não declare resolvido sem uma execução real antes/depois mostrando uma única mensagem.
+```
+
+Contraexemplo: "renomeia a variável `x` para `totalPedidos` no `calc.js`" → Esforço `baixo`; no máximo "Não altere outra lógica." O prompt não cresce.
+
 ## Formato da resposta
 
 Por padrão, a primeira resposta é **só o formulário de discovery** — nenhuma das seções abaixo. As cinco seções vêm na mensagem seguinte, após as respostas. Só quando o discovery for pulado pela exceção da §1.5 as cinco seções vêm direto na primeira resposta.
@@ -141,7 +191,7 @@ Responda em exatamente cinco seções, sem preâmbulo, nesta ordem. O **Prompt r
 |------|--------|------|
 | Papel | ✓ / ✗ / n/a | (obrigatória para ✗ e n/a — o que faltou / por que não se aplica) |
 | Objetivo | ... | ... |
-| ...demais slots... |
+| ...demais slots, até Esforço e Postura... |
 
 Slots n/a com a mesma justificativa podem ser agrupados em uma única linha.
 
