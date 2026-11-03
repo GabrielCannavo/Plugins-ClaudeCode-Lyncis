@@ -81,6 +81,10 @@ duas versões disputando o mesmo gatilho. A invocação do improve muda de
 
 ## Changelog
 
+### v1.2.1
+
+- `improve` v1.7.1: subagentes e esforço da sessão passam a ser decididos separadamente. O esforço só sobe quando o executor precisa orquestrar (dividir, conciliar, redespachar); conferir o retorno dos subagentes vira armadilha, não esforço. Origem: eval de 2026-11-03, caso 2.
+
 ### v1.2.0
 
 - `improve` v1.7.0: nova seção **Configuração sugerida** (sexta seção da resposta) recomenda modelo e esforço da sessão (baixo · médio · alto · extra · máximo), fora do prompt refinado. Modelo adaptativo ao host (Claude → só Claude; Codex → só Codex). Régua: esforço = quanto a tarefa precisa de interação vs. decisões autônomas (heurística ainda não validada).

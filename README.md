@@ -41,6 +41,7 @@ e `claude plugin update lyncis-kit@gabriel-local` (o `install` não faz upgrade)
 > A v1.5.1 fixou a sequência de chamada do formulário e a nova tentativa quando
 > ele não aparece. A v1.6.0 adicionou os slots Esforço (com armadilhas) e
 > Postura, e a regra de correção de rumo. A v1.7.0 adicionou a Configuração sugerida
-> (modelo e esforço da sessão) e o slot Subagentes. A partir da v1.5.1 o improve vive só no `lyncis-kit`; o
+> (modelo e esforço da sessão) e o slot Subagentes; a v1.7.1 desacoplou
+> subagentes de esforço. A partir da v1.5.1 o improve vive só no `lyncis-kit`; o
 > plugin avulso `improve-plugin/` e os instaladores por arquivo
 > (`instalar-*-improve.md`) foram removidos.

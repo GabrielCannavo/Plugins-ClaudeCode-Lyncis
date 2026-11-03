@@ -127,7 +127,7 @@ Saída: cada restrição citada no prompt refinado carrega origem verificável (
   - **baixo:** no máximo uma linha, e só se houver risco real de over-engineering (ex.: "Não altere outra lógica."). Na maioria dos casos, nada.
   - **médio / alto:** uma linha `Esforço: <nível> — <fator>` seguida de `Armadilhas:` com 1-3 bullets. Cada armadilha é específica da tarefa e acionável (o que não fazer ou o que verificar). Teste: se a armadilha serve igual para qualquer tarefa, corte.
 - **Postura** entra no prompt refinado como comportamento verificável (§3), em geral logo no início.
-- **Subagentes** (só quando o slot 13 é sim): o prompt refinado ganha um bloco `Subagentes:` com 1 bullet por subagente — `<nome exato>: <parte delegada> — <por quê>`. Se nenhum instalado serve, o bloco não aparece. Subagentes em paralelo costumam pedir esforço de sessão alto ou mais (§5.1); se você recomendar baixo/médio com subagentes, justifique.
+- **Subagentes** (só quando o slot 13 é sim): o prompt refinado ganha um bloco `Subagentes:` com 1 bullet por subagente — `<nome exato>: <parte delegada> — <por quê>`. Se nenhum instalado serve, o bloco não aparece. Subagentes e esforço de sessão (§5.1) são decididos separadamente: subagentes dependem da forma da tarefa, esforço de quantas decisões o executor toma sozinho. Suba o esforço só quando o executor precisar orquestrar — decidir como dividir, conciliar resultados divergentes ou redespachar um subagente. Se o risco for aceitar o retorno dos subagentes sem conferir, isso vira armadilha no prompt, não esforço maior.
 
 ### 2.1. Correção de rumo
 
