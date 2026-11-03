@@ -170,7 +170,7 @@ Régua (heurística do usuário, ainda não validada — ajuste quando houver ev
 |-------|--------|
 | baixo | Tarefa curta e bem especificada, ou sensível a ponto de o usuário querer decidir cada passo. |
 | médio | Padrão para a maioria. Tira algumas conclusões sozinho e pergunta o resto. |
-| alto | O usuário quer delegar: várias decisões autônomas, investigação, alguns subagentes. |
+| alto | O usuário quer delegar: várias decisões autônomas, investigação, orquestração de subagentes. |
 | extra / máximo | Delegação longa e ampla — muitas peças, muitos subagentes, pouco retorno ao usuário até o fim. Custo e tempo bem maiores. |
 
 Na dúvida entre dois níveis, recomende o mais baixo e diga em meia linha o que justificaria subir.
@@ -209,7 +209,7 @@ Configuração sugerida do caso do webhook: modelo mais capaz · esforço alto �
 
 Contraexemplo: "renomeia a variável `x` para `totalPedidos` no `calc.js`" → Esforço `baixo`; no máximo "Não altere outra lógica." O prompt não cresce. Configuração sugerida: modelo rápido · esforço baixo.
 
-Rascunho com subagentes: "audita os 12 workflows do cliente e me diz quais estão sem tratamento de erro" → slot 13 `✗ → sim`; o prompt refinado ganha `Subagentes:` com o auditor de workflow instalado, um por lote de workflows, em paralelo. Configuração sugerida: modelo mais capaz · esforço alto — muitas peças independentes, o usuário quer só o relatório.
+Rascunho com subagentes: "audita os 12 workflows do cliente e me diz quais estão sem tratamento de erro" → slot 13 `✗ → sim`; o prompt refinado ganha `Subagentes:` com o auditor de workflow instalado, um por lote de workflows, em paralelo. Configuração sugerida: modelo mais capaz · esforço alto — o executor decide como dividir os lotes e concilia os achados, e o usuário quer só o relatório. (Só ler e tabular, sem orquestrar, ficaria em médio.)
 
 ## Formato da resposta
 
