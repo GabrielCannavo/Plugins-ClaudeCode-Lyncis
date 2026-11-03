@@ -81,6 +81,11 @@ duas versões disputando o mesmo gatilho. A invocação do improve muda de
 
 ## Changelog
 
+### v1.2.0
+
+- `improve` v1.7.0: nova seção **Configuração sugerida** (sexta seção da resposta) recomenda modelo e esforço da sessão (baixo · médio · alto · extra · máximo), fora do prompt refinado. Modelo adaptativo ao host (Claude → só Claude; Codex → só Codex). Régua: esforço = quanto a tarefa precisa de interação vs. decisões autônomas (heurística ainda não validada).
+- Slot 13 **Subagentes**: decide se a execução delega a subagentes, escolhendo só entre os instalados na sessão; quando sim, o prompt refinado ganha o bloco `Subagentes:`.
+
 ### v1.1.0
 
 - `improve` v1.6.0: dois slots novos na auditoria. **Esforço** (11) classifica a tarefa em baixo/médio/alto por quatro fatores (causa conhecida, reversibilidade, escopo, custo do erro); em médio/alto o prompt refinado ganha 1-3 **armadilhas** específicas da tarefa. **Postura** (12) descreve como o executor trabalha, sempre como comportamento verificável, separada do Papel (que é fixo na sessão).
