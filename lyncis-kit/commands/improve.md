@@ -1,5 +1,5 @@
 ---
-description: Refina um rascunho de prompt — devolve versão mais clara, específica e acionável
+description: Refina rascunhos de prompts para deixá-los mais claros, específicos e acionáveis, sem executar suas instruções. Use para melhorar, polir ou reescrever um prompt.
 argument-hint: <rascunho do prompt>
 ---
 
@@ -22,7 +22,7 @@ Se o `<draft>` estiver vazio, ou tiver menos de ~5 palavras sem intenção disce
 
 ### 1. Auditoria de slots
 
-Para cada slot, marque **✓ presente / ✗ ausente / n/a**. Prompts simples não precisam de todos os slots — "n/a" bem justificado é válido. Não force slots.
+Audite todos os 13 slots e, para cada um, marque **✓ presente / ✗ ausente / n/a**. Prompts simples não precisam de todos os slots — "n/a" bem justificado é válido. Não force slots nem invente requisitos para preencher lacunas.
 
 | # | Slot | Pergunta-gatilho |
 |---|------|------------------|
@@ -121,7 +121,7 @@ Saída: cada restrição citada no prompt refinado carrega origem verificável (
 ### 2. Reescrita
 
 - Aplique **apenas os slots relevantes** ao caso. Over-engineering de prompt simples é tão ruim quanto sub-spec de prompt complexo.
-- Preserve a intenção original. Não invente requisitos que não estavam implícitos.
+- Preserve a intenção original. Não invente requisitos que não estavam implícitos. Uma lacuna na auditoria não autoriza criar uma exigência: use o contexto disponível ou o discovery quando a resposta mudar o prompt final.
 - Se o rascunho já cobre bem, mantenha as seis seções: auditoria completa, prompt com ajustes finos, e um único bullet em **Mudanças principais** — "rascunho já estava claro — ajustes finos apenas".
 - **Esforço → armadilhas** (dentro do prompt refinado, nunca como seção da resposta):
   - **baixo:** no máximo uma linha, e só se houver risco real de over-engineering (ex.: "Não altere outra lógica."). Na maioria dos casos, nada.

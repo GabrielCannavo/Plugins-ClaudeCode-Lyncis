@@ -81,6 +81,11 @@ duas versões disputando o mesmo gatilho. A invocação do improve muda de
 
 ## Changelog
 
+### v1.2.2
+
+- `improve`: descrição explicita o refinamento sem executar o rascunho; auditoria cobre os 13 slots e a reescrita reforça que lacunas não autorizam inventar requisitos.
+- Preserva discovery, 13 slots e as seis seções da resposta.
+
 ### v1.2.1
 
 - `improve` v1.7.1: subagentes e esforço da sessão passam a ser decididos separadamente. O esforço só sobe quando o executor precisa orquestrar (dividir, conciliar, redespachar); conferir o retorno dos subagentes vira armadilha, não esforço. Origem: eval de 2026-11-03, caso 2.
